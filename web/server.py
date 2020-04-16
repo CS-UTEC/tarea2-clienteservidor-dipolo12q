@@ -10,11 +10,21 @@ engine = db.createEngine()
 app = Flask(__name__)
 
 
+@app.route('/informacion')
+def saludar():
+    return "INFORMACION"
+
+
+@app.route('/esprimo/<numero>')
+def es_primo(numero):
+    for i in range(2,numero):
+        if numero % i == 0:
+            return False
+        else:
+            return True
 @app.route('/static/<content>')
 def static_content(content):
     return render_template(content)
-
-
 
 
 if __name__ == '__main__':
