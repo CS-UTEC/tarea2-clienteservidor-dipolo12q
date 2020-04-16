@@ -17,11 +17,11 @@ def saludar():
 
 @app.route('/esprimo/<numero>')
 def es_primo(numero):
-    for i in range(2,numero):
-        if numero % i == 0:
+    n = int(numero)
+    for i in range(2, n):
+        if int(numero) % i == 0:
             return False
-        else:
-            return True
+    return True
 @app.route('/static/<content>')
 def static_content(content):
     return render_template(content)
