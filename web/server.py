@@ -20,8 +20,8 @@ def es_primo(numero):
     n = int(numero)
     for i in range(2, n):
         if int(numero) % i == 0:
-            return False
-    return True
+            return str(False)
+    return str(True)
 @app.route('/static/<content>')
 def static_content(content):
     return render_template(content)
