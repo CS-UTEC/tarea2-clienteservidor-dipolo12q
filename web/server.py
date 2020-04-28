@@ -59,6 +59,33 @@ def static_content(content):
     return render_template(content)
 
 
+@app.route('/create_user/<nombre>/<apellido>/<pw>/<un>')
+def create_user(nombre, apellido, pw, un):
+    # Crear un objeto(instancia de una entidad)
+    user = entities.User(
+        name=nombre,
+        fullname=apellido,
+        password=pw,
+        username=un
+    )
+    db_session = db.getSession(engine)
+    db_session.add(user)
+    db_session.commit()
+    return "User created!"
+
+
+@app.route('/read_user')
+def read_users():
+    db_session = db.getSession(engine)
+    respuesta = db_session.query(entities.User)
+    users = respuesta[:]
+    i = 0
+    for user in users:
+        print(i, "NAME:\t", user.name, "APELIIDO:\t", user.fullname, "Pass:\t", user.password, "Username:\t", user.username)
+        i += 1
+    return "Users read!"
+
+
 if __name__ == '__main__':
     app.secret_key = ".."
     app.run(port=8080, threaded=True, host=('127.0.0.1'))
